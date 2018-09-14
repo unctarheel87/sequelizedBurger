@@ -1,0 +1,31 @@
+{
+  "name": "burger-react",
+  "version": "1.0.0",
+  "description": "React frontend with Express-powered API backend",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build:dev": "webpack --watch",
+    "build:prod": "webpack -p --env production",
+    "start": "nodemon server.js"
+  },
+  "author": "John Tillman",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "axios": "^0.18.0",
+    "babel-loader": "^8.0.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mysql2": "^1.6.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-materialize": "^2.4.5",
+    "sequelize": "^4.38.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
