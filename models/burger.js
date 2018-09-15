@@ -7,8 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     }  
   });
   
-  Burger.associate = models => {
+  Burger.associate = (models) => {
     Burger.hasMany(models.topping, { onDelete: 'cascade' })
+    Burger.belongsTo(models.user)
   };
   
   return Burger;

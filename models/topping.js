@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     topping_name: DataTypes.STRING
   });
 
-  Topping.associate = models => {
+  Topping.associate = (models) => {
     Topping.belongsTo(models.burger);
   };
 

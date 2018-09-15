@@ -70,19 +70,19 @@ export default class Burger extends Component {
           trigger={<Button className="modal-btn btn-large">Create A Burger</Button>}
         >
           <form className="new-burger" onSubmit={this.addBurger}>
-            <div class="input-field">
+            <div className="input-field">
               <input type="text" name="burger" required/>
               <label for="burger">Burger Name</label>
             </div>
-            <div class="input-field">
+            <div className="input-field">
               <input type="text" name="topping1" required/>
               <label for="topping1">Topping #1</label>
             </div>
-            <div class="input-field">
+            <div className="input-field">
               <input type="text" name="topping2" required/>
               <label for="topping2">Topping #2</label>
             </div>
-            <div class="input-field">
+            <div className="input-field">
               <input type="text" name="topping3" required/>
               <label for="topping3">Topping #3</label>
             </div>
