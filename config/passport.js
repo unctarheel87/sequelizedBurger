@@ -3,8 +3,12 @@ const LocalStrategy = require("passport-local").Strategy;
 
 const db = require("../models");
 
-passport.use(new LocalStrategy(
+passport.use(new LocalStrategy({
+  usernameField: 'data[]username',
+  passwordField: 'data[]password'
+},
   function(username, password, done) {
+    console.log(username, password)
     db.user.findOne({ 
       where: {
         username: username 

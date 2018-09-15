@@ -13,14 +13,5 @@ module.exports = {
       exclude: /node_modules/
     }]
   },
-  devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8081',
-        secure:false,
-        changeOrigin:true
-      }
-    }
-  }
+  mode: 'development'
 };

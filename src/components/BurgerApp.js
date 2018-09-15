@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { Burgers } from './Burgers'
 import { Modal, Button } from 'react-materialize'
+import Login from './Login'
 
 export default class Burger extends Component {
   constructor(props) {
@@ -12,6 +13,8 @@ export default class Burger extends Component {
     this.addBurger = this.addBurger.bind(this)
     this.updateBurger = this.updateBurger.bind(this)
     this.deleteBurger = this.deleteBurger.bind(this)
+    this.addUser = this.addUser.bind(this)
+    this.loginUser = this.loginUser.bind(this)
   }
 
   componentDidMount() {
@@ -26,7 +29,32 @@ export default class Burger extends Component {
     .catch((error) => {
       console.log(error);
     });
-  }  
+  }
+  
+  addUser(e) {
+    e.preventDefault()
+    const username = e.target.elements.username.value
+    const password = e.target.elements.password.value
+    axios.post('/api/users', { data: {username, password} })
+    .then((res) => {
+      console.log(res)
+      $('#modal_1').modal('close');
+      this.getApiData()
+    })
+    
+  }
+
+  loginUser(e) {
+    e.preventDefault()
+    const username = e.target.elements.username.value
+    const password = e.target.elements.password.value
+    axios.post('/api/login', { data: {username, password} })
+    .then((res) => {
+      console.log(res)
+      $('#modal_2').modal('close');
+      this.getApiData()
+    })
+  }
 
   addBurger(e) {
     e.preventDefault()
@@ -91,6 +119,7 @@ export default class Burger extends Component {
             >Create Burger</button>
           </form>
         </Modal>
+        <Login addUser={this.addUser} loginUser={this.loginUser}/>
         <Burgers burgers={this.state.apiData} 
                  updateBurger={this.updateBurger}
                  deleteBurger={this.deleteBurger}

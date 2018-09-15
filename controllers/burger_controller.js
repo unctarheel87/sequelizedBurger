@@ -10,6 +10,10 @@ module.exports = (app, db, path) => {
     res.sendFile('index.html')
   })
 
+  app.get('/users', isAuthenticated, (req, res) => {
+    res.send('johntillman')
+  })
+
   app.get('/api/burgers', (req, res) => {
     db.burger.findAll({ include: [db.topping] })
     .then(response => {
@@ -29,7 +33,7 @@ module.exports = (app, db, path) => {
 
   //create user
   app.post('/api/users', (req, res) => {
-    const newUser = req.body
+    const newUser = req.body.data
     db.user.create({
       username: newUser.username,
       password: newUser.password
