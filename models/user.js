@@ -17,13 +17,11 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.validPassword = function(password) {
-    return bcrypt.compare(password, this.password);
+    return bcrypt.compareSync(password, this.password)
   };
 
   User.hook("beforeCreate", function(user) {
-    return bcrypt.hash(user.password, 10).then(hash => {
-      user.password = hash
-    });
+    user.password = bcrypt.hashSync(user.password, 10)
   })
   
   return User;

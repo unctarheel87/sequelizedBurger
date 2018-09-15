@@ -2,22 +2,18 @@ const passport = require("../config/passport");
 const isAuthenticated = require('../config/middleware/isAuthenticated')
 
 module.exports = (app, db, path) => {
-  app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/login.html'))
-  })
-  
   app.get('/', (req, res) => {
     res.sendFile('index.html')
   })
 
-  app.get('/users', isAuthenticated, (req, res) => {
-    res.send('johntillman')
-  })
-
-  app.get('/api/burgers', (req, res) => {
-    db.burger.findAll({ include: [db.topping] })
+  app.get('/api/burgers', isAuthenticated, (req, res) => {
+    db.burger.findAll({ 
+      where: {
+        userId: req.user.id
+      },
+      include: [db.topping] })
     .then(response => {
-      res.json(response)
+      res.json({ data: response, isLoggedIn: true })
     })
     .catch(err => {
       console.log(err)
@@ -26,9 +22,9 @@ module.exports = (app, db, path) => {
 
   //authenticate POST route
   app.post('/api/login', passport.authenticate('local'), function(req, res) {
-    console.log(req.user)
+    console.log(req.user.id)
     console.log(req.session)
-    res.json("hello");
+    res.json(true);
   });
 
   //create user
@@ -46,6 +42,14 @@ module.exports = (app, db, path) => {
       res.status(500).end()
     })
   })
+
+  //logout
+  app.get("/api/logout", function(req, res) {
+    console.log(req.user)
+    req.logout();
+    console.log(req.session)
+    res.json(false)
+  });
 
   app.post('/api/burgers/', (req, res) => {
     const newBurger = req.body
