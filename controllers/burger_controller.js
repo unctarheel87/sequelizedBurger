@@ -13,7 +13,7 @@ module.exports = (app, db, path) => {
       },
       include: [db.topping] })
     .then(response => {
-      res.json({ data: response, isLoggedIn: true })
+      res.json({ data: response, user: req.user.username, isLoggedIn: true })
     })
     .catch(err => {
       console.log(err)

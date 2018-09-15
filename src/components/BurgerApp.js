@@ -10,6 +10,7 @@ export default class Burger extends Component {
     super(props);
     this.state = {
       apiData: [],
+      user: '',
       isLoggedIn: false
     }
     this.addBurger = this.addBurger.bind(this)
@@ -27,7 +28,11 @@ export default class Burger extends Component {
   getApiData() {
     axios.get('/api/burgers')
     .then((res) => {
-      this.setState({apiData: res.data.data, isLoggedIn: res.data.isLoggedIn});
+      this.setState({
+        apiData: res.data.data,
+        user: res.data.user,
+        isLoggedIn: res.data.isLoggedIn
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -108,7 +113,10 @@ export default class Burger extends Component {
     } else if(this.state.isLoggedIn == true) {
       return (
         <div>
-          <Navbar logOut={this.logOut} />
+          <Navbar logOut={this.logOut} user={this.state.user} />
+          <header>
+            <h1>Eat That Burger!</h1>
+          </header>
           <CreateBurger addBurger={this.addBurger} />
           <Burgers burgers={this.state.apiData} 
                   updateBurger={this.updateBurger}
