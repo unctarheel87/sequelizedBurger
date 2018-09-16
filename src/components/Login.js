@@ -39,6 +39,7 @@ export default (props) => {
                   type="submit"
           >Login</button>
         </form>
+        <p>{props.msg ? props.msg : ''}</p>
       </Modal>
     </div>
   )

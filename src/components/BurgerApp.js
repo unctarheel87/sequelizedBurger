@@ -46,7 +46,7 @@ export default class Burger extends Component {
     axios.post('/api/users', { data: {username, password} })
     .then((res) => {
       console.log(res)
-      $('#modal_0').modal('close');
+      $('.open').modal('close');
       this.getApiData()
     })
     
@@ -59,8 +59,11 @@ export default class Burger extends Component {
     axios.post('/api/login', {username, password} )
     .then((res) => {
       console.log(res)
-      $('#modal_1').modal('close');
+      $('.open').modal('close');
       this.getApiData()
+    })
+    .catch(err => {
+      this.setState({message: 'Incorrect username or password!'})
     })
   }
 
@@ -84,7 +87,7 @@ export default class Burger extends Component {
     axios.post('/api/burgers', { data: {burger_name, toppings} })
     .then((res) => {
       console.log(res)
-      $('#modal_2').modal('close');
+      $('.open').modal('close');
       this.getApiData()
     })
   }
@@ -109,14 +112,18 @@ export default class Burger extends Component {
 
   render() {
     if(!this.state.isLoggedIn) {
-      return <Login addUser={this.addUser} loginUser={this.loginUser}/>
+      return (
+        <div>
+          <Navbar />
+          <h1 className="header">The Burger Shack</h1>
+          <Login addUser={this.addUser} loginUser={this.loginUser} msg={this.state.message}/>
+        </div>
+      )
     } else if(this.state.isLoggedIn == true) {
       return (
         <div>
           <Navbar logOut={this.logOut} user={this.state.user} />
-          <header>
-            <h1>Eat That Burger!</h1>
-          </header>
+          <h1 className="header">Welcome {this.state.user}!</h1>
           <CreateBurger addBurger={this.addBurger} />
           <Burgers burgers={this.state.apiData} 
                   updateBurger={this.updateBurger}
