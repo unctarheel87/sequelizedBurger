@@ -43,7 +43,7 @@ export default class Burger extends Component {
     e.preventDefault()
     const username = e.target.elements.username.value
     const password = e.target.elements.password.value
-    axios.post('/api/users', { data: {username, password} })
+    axios.post('/api/users', { username, password })
     .then((res) => {
       console.log(res)
       $('.open').modal('close');

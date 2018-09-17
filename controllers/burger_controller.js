@@ -29,14 +29,13 @@ module.exports = (app, db, path) => {
 
   //create user
   app.post('/api/users', (req, res) => {
-    const newUser = req.body.data
-    const user = {
-      username: newUser.username,
-      password: newUser.password
+    const newUser = {
+      username: req.body.username,
+      password: req.body.password
     }
-    db.user.create(user)
+    db.user.create(newUser)
     .then(() => {
-      req.login(user, () => {
+      passport.authenticate('local')(req, res, () => {
         res.status(200).end()
       })
     })
