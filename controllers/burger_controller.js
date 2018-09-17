@@ -30,12 +30,15 @@ module.exports = (app, db, path) => {
   //create user
   app.post('/api/users', (req, res) => {
     const newUser = req.body.data
-    db.user.create({
+    const user = {
       username: newUser.username,
       password: newUser.password
-    })
+    }
+    db.user.create(user)
     .then(() => {
-      res.status(200).end()
+      req.login(user, () => {
+        res.status(200).end()
+      })
     })
     .catch((err) => {
       console.log(err)
