@@ -11,7 +11,10 @@ module.exports = (app, db, path) => {
       where: {
         userId: req.user.id
       },
-      include: [db.topping] })
+      include: [db.topping],
+      order: [
+        ['burger_name', 'ASC']
+      ]})
     .then(response => {
       res.json({ data: response, user: req.user.username, isLoggedIn: true })
     })
