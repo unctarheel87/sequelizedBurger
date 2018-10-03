@@ -6,6 +6,7 @@ A burger-themed recipe app. You are able to add a burger and 3 toppings.  Clicki
 
 ## Technology
 * Client-side rendering is handled by `React.js`.
+* Single Page App (SPA) with conditional rendering for `user` profiles and `burger` state.
 * `mySQL` database.
 * `Express.js` for API endpoints.
 * `Passport.js` for authentication
