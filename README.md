@@ -11,5 +11,5 @@ A burger-themed recipe app. You are able to add a burger and 3 toppings.  Clicki
 * `Passport.js` for authentication
 
 ## Guest Login
-username: guest
-password: guest
+* username: `"guest"`
+* password: `"guest"`
