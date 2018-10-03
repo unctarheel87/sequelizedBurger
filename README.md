@@ -8,3 +8,8 @@ A burger-themed recipe app. You are able to add a burger and 3 toppings.  Clicki
 * Client rendering is handled by `React.js`.
 * `mySQL` database.
 * `Express.js` for API endpoints.
+* `Passport.js` for authentication
+
+## Guest Login
+username: guest
+password: guest
